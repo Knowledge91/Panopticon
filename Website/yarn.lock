@@ -3622,6 +3622,12 @@ lru-cache@^4.0.1, lru-cache@^4.1.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
+macro-inferno@^0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/macro-inferno/-/macro-inferno-0.2.1.tgz#20de3ae8e9ac76b3fc652cbf6c25f325a9ba2e22"
+  dependencies:
+    nan "^2.7.0"
+
 make-dir@^1.0.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-1.2.0.tgz#6d6a49eead4aae296c53bbf3a1a008bd6c89469b"
@@ -3906,7 +3912,7 @@ mz@^2.6.0:
     object-assign "^4.0.1"
     thenify-all "^1.0.0"
 
-nan@^2.0.5, nan@^2.0.8, nan@^2.3.0, nan@^2.3.3:
+nan@^2.0.5, nan@^2.0.8, nan@^2.3.0, nan@^2.3.3, nan@^2.7.0:
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.9.2.tgz#f564d75f5f8f36a6d9456cca7a6c4fe488ab7866"
 
@@ -4132,6 +4138,18 @@ onetime@^2.0.0:
   resolved "https://registry.yarnpkg.com/onetime/-/onetime-2.0.1.tgz#067428230fd67443b2794b22bba528b6867962d4"
   dependencies:
     mimic-fn "^1.0.0"
+
+opencv-build@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/opencv-build/-/opencv-build-0.0.3.tgz#5465b9023d9074a5e6983d0de14d22ddb2fecb15"
+
+opencv4nodejs@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/opencv4nodejs/-/opencv4nodejs-3.1.0.tgz#3c7737bff259d6ecbaffd831b6615635bffebbb2"
+  dependencies:
+    macro-inferno "^0.2.1"
+    nan "^2.7.0"
+    opencv-build "0.0.3"
 
 opn@^5.1.0:
   version "5.2.0"
