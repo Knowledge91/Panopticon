@@ -66,6 +66,7 @@ class App extends React.Component {
     }
 
     render() {
+        const { factories } = this.state;
         return (
             <div>
                 <Navigation client={this.state.client} reset={this.reset} />
@@ -85,7 +86,18 @@ class App extends React.Component {
                 />
                 <Route
                     path='/factory/:address'
-                    component={Factory}
+                    render={
+                        ({match}) => {
+                            const address = match.params.address;
+                            // select factory
+                            for(var factory of factories) {
+                                if(factory.address == address) {
+                                    break;
+                                }
+                            }
+                            return <Factory factory={factory}/>;
+                        }
+                    }
                 />
             </div>
         )
