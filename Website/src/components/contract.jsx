@@ -14,11 +14,8 @@ class Contract extends React.Component {
             loading: false
         }
 
-
-
         this.selectMinAge = this.selectMinAge.bind(this);
         this.deployContract = this.deployContract.bind(this);
-        this.fulfillContract = this.fulfillContract.bind(this);
     }
 
     deployContract() {
@@ -29,12 +26,6 @@ class Contract extends React.Component {
                 this.props.addContractAddressToFactory(address, this.props.factory);
                 this.props.history.push(`/contract/${address}`);
             }
-        });
-    }
-
-    fulfillContract() {
-        fulfillPanopticonContract("").then((receipt) => {
-            console.log(receipt);
         });
     }
 
@@ -63,7 +54,6 @@ class Contract extends React.Component {
                         </FormGroup>
                         <FormGroup>
                             <Button onClick={this.deployContract}>Deploy</Button>
-                            <Button onClick={this.fulfillContract}>Fulfill</Button>
                         </FormGroup>
                     </Form>
                 </div>

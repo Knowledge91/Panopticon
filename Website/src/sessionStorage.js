@@ -11,14 +11,42 @@ export function resetSession() {
                 address: "0x128f5946f637b0c1329b1b87f6574133c20f9fd4",
                 balance: 0,
                 price: 1000,
-                contracts: ["0x131e482FdEbB6160D1BBc914d6475144688e316f"]
+                contracts: ["0x80510E21dD42F09E550D5AaB81d5024e5f98A16C"],
+                workers: [
+                    {
+                        name: "Elon Reeve Musk",
+                        age: 46
+                    },
+                    {
+                        name: "Michelle Obama",
+                        age: 54
+                    },
+                    {
+                        name: "Will Smith",
+                        age: 49
+                    },
+                ]
             },
             {
                 name: "B",
                 address: "0xb65224760de037f5f843033ac912667b331af5c4",
                 balance: 0,
                 price: 400,
-                contracts: []
+                contracts: [],
+                workers: [
+                    {
+                        name: "Elon Reeve Musk",
+                        age: 46
+                    },
+                    {
+                        name: "Michelle Obama",
+                        age: 54
+                    },
+                    {
+                        name: "Will Smith",
+                        age: 49
+                    },
+                ]
             },
             // {
             //     name: "C",

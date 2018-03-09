@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Navigation from './components/navigation.jsx';
-import Factory from './components/factory.jsx';
+import Dashboard from './components/dashboard.jsx';
 import Contract from './components/contract.jsx';
 import ContractStatus from './components/contractStatus.jsx';
+import Factory from './components/factory.jsx'; 
 import { getBalance, getFactoriesInfo } from './ethereum.js'
 import { getSession, saveSession, resetSession } from './sessionStorage.js';
 
@@ -71,7 +72,7 @@ class App extends React.Component {
                 <Route
                     exact
                     path='/'
-                    render={() => <Factory factories={this.state.factories} selectFactory={this.selectFactory}/>}
+                    render={() => <Dashboard factories={this.state.factories} selectFactory={this.selectFactory}/>}
                 />
                 <Route
                     exact
@@ -81,6 +82,10 @@ class App extends React.Component {
                 <Route
                     path='/contract/:address'
                     component={ContractStatus}
+                />
+                <Route
+                    path='/factory/:address'
+                    component={Factory}
                 />
             </div>
         )

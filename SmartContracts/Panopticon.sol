@@ -3,9 +3,9 @@ pragma solidity ^0.4.16;
 contract Panopticon {
   address public client;
   address public fabric;
-  uint256 balance;
+  uint256 public balance;
 
-  bool hasChildLabour = false;
+  bool public hasChildLabour = false;
 
   uint public deadline;
   bool public fulfilled;
@@ -16,15 +16,12 @@ contract Panopticon {
    * Constructor
    *
    */
-  function Panopticon(address _client, address _fabric, uint256 durationInSeconds) payable public {
+  function Panopticon(address _client, address _fabric, uint256 durationInSeconds, bool _hasChildLabour) payable public {
     client = _client;
     fabric = _fabric;
     balance = msg.value;
     deadline = now + durationInSeconds * 1 seconds;
-  }
-
-  function test() constant public returns (string) {
-    return "test";
+    hasChildLabour = _hasChildLabour;
   }
 
   modifier afterDeadline() { if (now >= deadline) _; }
@@ -34,7 +31,6 @@ contract Panopticon {
    *
    */
   function fulfillContract() afterDeadline public returns (bool) {
-
     if(!hasChildLabour) {
       fabric.transfer(balance);
       ContractEnd(true, balance);
