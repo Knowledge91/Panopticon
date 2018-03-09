@@ -3,13 +3,15 @@ import { Link } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { unlockCoinbase, deployPanopticonContract, panopticonContractInfo, fulfillPanopticonContract } from '../ethereum.js';
 import { withRouter } from 'react-router-dom';
+import { DoubleDounce } from 'styled-spinkit';
 
 class Contract extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            minAge: 14
+            minAge: 14,
+            loading: false
         }
 
 
@@ -20,6 +22,7 @@ class Contract extends React.Component {
     }
 
     deployContract() {
+        this.setState({ loading: true });
         deployPanopticonContract(this.props.client.address, this.props.factory.address).then((address) => {
             if(address) {
                 console.log("deployed");
@@ -40,27 +43,34 @@ class Contract extends React.Component {
     }
 
     render() {
+        const loading = this.state.loading;
         return (
             <div>
-                <h1 className="text-center">
-                    Contract
-                </h1>
-                <h2>Between {this.props.client.name} and {this.props.factory.name}</h2>
-                <Form>
-                    <FormGroup>
-                        <Label for="minAge">Minimum Age: </Label>
-                        <Input type="select" name="minAge" value={this.state.minAge} onChange={this.selectMinAge}>
-                            <option>14</option>
-                            <option>16</option>
-                            <option>18</option>
-                        </Input>
-                    </FormGroup>
-                    <FormGroup>
-                        <Button onClick={this.deployContract}>Deploy</Button>
-                        <Button onClick={this.fulfillContract}>Fulfill</Button>
-                    </FormGroup>
-                </Form>
-            </div>
+            {!loading ? (
+                <div>
+                    <h1 className="text-center">
+                        Contract
+                    </h1>
+                    <h2>Between {this.props.client.name} and {this.props.factory.name}</h2>
+                    <Form>
+                        <FormGroup>
+                            <Label for="minAge">Minimum Age: </Label>
+                            <Input type="select" name="minAge" value={this.state.minAge} onChange={this.selectMinAge}>
+                                <option>14</option>
+                                <option>16</option>
+                                <option>18</option>
+                            </Input>
+                        </FormGroup>
+                        <FormGroup>
+                            <Button onClick={this.deployContract}>Deploy</Button>
+                            <Button onClick={this.fulfillContract}>Fulfill</Button>
+                        </FormGroup>
+                    </Form>
+                </div>
+            ) : (
+                <DoubleDounce size="100" />
+            )}
+                </div>
         )
     }
 }

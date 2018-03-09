@@ -18,9 +18,7 @@ export default class Navigation extends React.Component {
             <div>
                 <Navbar color="faded" light expand="md">
                     <NavbarBrand href="/">Panopticon</NavbarBrand>
-                    <NavItem>
-                        <NavLink href="/">Home</NavLink>
-                    </NavItem>
+                    <NavLink href="/">Dashboard</NavLink>
 
 
                     <Nav className="ml-auto" navbar>
