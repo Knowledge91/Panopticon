@@ -8,6 +8,7 @@ contract Panopticon {
   bool hasChildLabour = false;
 
   uint public deadline;
+  bool public fulfilled;
 
   event ContractEnd(bool fulfilled, uint256 amount);
 
@@ -22,6 +23,10 @@ contract Panopticon {
     deadline = now + durationInSeconds * 1 seconds;
   }
 
+  function test() constant public returns (string) {
+    return "test";
+  }
+
   modifier afterDeadline() { if (now >= deadline) _; }
 
   /**
@@ -29,13 +34,16 @@ contract Panopticon {
    *
    */
   function fulfillContract() afterDeadline public returns (bool) {
+
     if(!hasChildLabour) {
       fabric.transfer(balance);
       ContractEnd(true, balance);
+      fulfilled = true;
       return true;
     } else {
       client.transfer(balance);
       ContractEnd(false, balance);
+      fulfilled = false;
       return false;
     }
   }

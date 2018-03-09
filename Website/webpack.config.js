@@ -2,7 +2,9 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: [
+        './src/index.jsx',
+    ],
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'bundle.js'
@@ -10,11 +12,18 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(js|jsx)$/,
                 use: 'babel-loader',
-                test: /\.js$/,
                 exclude: /node_modules/
+            },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
             }
         ]
+    },
+    resolve: {
+        extensions: ['*', '.js', '.jsx']
     },
     devtool: 'source-map',
     plugins: [
@@ -23,12 +32,10 @@ module.exports = {
                 from: path.join(__dirname, 'src')+'/index.html',
                 to: 'index.html'
             }
-        ]),
-        new CopyWebpackPlugin([
-            {
-                from: path.join(__dirname, 'src/clmtrackr'),
-                to: 'clmtrackr'
-            }
         ])
-    ]
+    ],
+    devServer: {
+        contentBase: './build',
+        historyApiFallback: true
+    }
 }
