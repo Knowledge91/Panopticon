@@ -70,7 +70,8 @@ export function resetSession() {
             price: 1000,
             contracts: []
         },
-        loading: true
+        loading: true,
+        bottomNav: 0
     };
 
     sessionStorage.setItem('state', JSON.stringify(initialState));

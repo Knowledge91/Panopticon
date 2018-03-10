@@ -9,6 +9,11 @@ import MenuItem from 'material-ui/Menu/MenuItem';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
 import Icon from 'material-ui/Icon';
+import Paper from 'material-ui/Paper';
+import Grid from 'material-ui/Grid';
+import Radio, { RadioGroup } from 'material-ui/Radio';
+import { FormLabel, FormControl, FormControlLabel, FormHelperText } from 'material-ui/Form';
+import Divider from 'material-ui/Divider';
 
 const ages = [14, 16, 18];
 const durations = [30, 60, 120, 300];
@@ -21,13 +26,18 @@ const styles = theme => ({
     textField: {
         marginLeft: theme.spacing.unit,
         marginRight: theme.spacing.unit,
-        width: 200,
+        width: 500,
     },
     menu: {
         width: 200,
     },
+    margin: {
+        marginTop: 25,
+        marginBottom: 25
+    },
     button: {
         margin: theme.spacing.unit,
+        width: "80%",
     },
     leftIcon: {
         marginRight: theme.spacing.unit,
@@ -38,6 +48,12 @@ const styles = theme => ({
     iconSmall: {
         fontSize: 20,
     },
+    root: {
+        flexGrow: 1
+    },
+    center: {
+        textAlign: "center"
+    }
 });
 
 class Contract extends React.Component {
@@ -71,66 +87,94 @@ class Contract extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes, client, factory } = this.props;
         const loading = this.state.loading;
         return (
             <div>
             {!loading ? (
                 <div>
-                    <h1 className="text-center">
+                    <h2>
                         Contract
-                    </h1>
-                    <h2>Between {this.props.client.name} and {this.props.factory.name}</h2>
-                    <form>
-                        <TextField
-                            id="select-minAge"
-                            select
-                            label="Minimum Age"
-                            className={classes.textField}
-                            value={this.state.minAge}
-                            onChange={this.handleChange('minAge')}
-                            SelectProps={{
-                                MenuProps: {
-                                    className: classes.menu,
-                                },
-                            }}
-                            helperText="Please select the minimum age in years."
-                            margin="normal"
-                        >
-                            {ages.map(age => (
-                                <MenuItem key={age} value={age}>
-                                    {age}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <br />
-                        <TextField
-                            id="select-currency"
-                            select
-                            label="Duration"
-                            className={classes.textField}
-                            value={this.state.duration}
-                            onChange={this.handleChange('duration')}
-                            SelectProps={{
-                                MenuProps: {
-                                    className: classes.menu,
-                                },
-                            }}
-                            helperText="Please select the duration in seconds."
-                            margin="normal"
-                        >
-                            {durations.map(duration => (
-                                <MenuItem key={duration} value={duration}>
-                                    {duration} s ( {duration/60} min )
-                                </MenuItem>
-                            ))}
-                        </TextField>
-                        <br />
-                        <Button className={classes.button} variant="raised" color="primary">
-                            Sign
-                            <Icon className={classes.rightIcon}>send</Icon>
-                        </Button>
-                    </form>
+                    </h2>
+                    <Paper>
+                        <form>
+                            <br />
+                            <h3 className={classes.center}>Contracting Parties</h3>"
+                            <br />
+
+                            <Grid container className={classes.root} justify="space-around" spacing={40}>
+                                <div />
+                                <FormControlLabel value="other" control={<Radio />} label={`You - ${client.address}`} checked/>
+                                <FormControlLabel value="other" control={<Radio />} label={`Factory - ${factory.address}`} checked/>
+                                <div />
+                            </Grid>
+
+                            <Divider className={classes.margin} />
+
+                            <br />
+                            <h3 className={classes.center}>Conditions</h3>"
+                            <br />
+
+                            <Grid container className={classes.root} justify="space-around" spacing={40}>
+                            <TextField
+                                id="select-minAge"
+                                select
+                                label="Minimum Age"
+                                className={classes.textField}
+                                value={this.state.minAge}
+                                onChange={this.handleChange('minAge')}
+                                SelectProps={{
+                                    MenuProps: {
+                                        className: classes.menu,
+                                    },
+                                }}
+                                helperText="Please select the minimum age in years."
+                                margin="normal"
+                            >
+                                {ages.map(age => (
+                                    <MenuItem key={age} value={age}>
+                                        {age}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <TextField
+                                id="select-currency"
+                                select
+                                label="Duration"
+                                className={classes.textField}
+                                value={this.state.duration}
+                                onChange={this.handleChange('duration')}
+                                SelectProps={{
+                                    MenuProps: {
+                                        className: classes.menu,
+                                    },
+                                }}
+                                helperText="Please select the duration in seconds."
+                                margin="normal"
+                            >
+                                {durations.map(duration => (
+                                    <MenuItem key={duration} value={duration}>
+                                        {duration} s ( {duration/60} min )
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            </Grid>
+
+                            <Divider className={classes.margin} />
+
+                            <br />
+                            <h3 className={classes.center}>Contracting Parties</h3>"
+                            <br />
+
+                            <Grid container justify="center">
+                                <Button className={classes.button} variant="raised" color="primary">
+                                    Sign
+                                    <Icon className={classes.rightIcon}>send</Icon>
+                                </Button>
+                            </Grid>
+                            <br />
+                        </form>
+                    </Paper>
                 </div>
             ) : (
                 <DoubleDounce size="100" />
