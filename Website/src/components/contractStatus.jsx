@@ -42,7 +42,7 @@ export default class ContractStatus extends React.Component {
                     <li>Fulfilled: {fulfilled ? "yes" : "no"}</li>
                     <li>Balance: {balance}</li>
                     <li>Has Child Labour: {hasChildLabour ? "yes" : "no"}</li>
-                    <li>Factory: {factory}</li>
+                    <li>Factory: <Link to={`/factory/${factory}`}>{factory}</Link></li>
                     <li>Client: <Link to="/">{client}</Link></li>
                 </ul>
             </div>
