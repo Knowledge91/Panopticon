@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
         const { classes, factories, selectFactory } = this.props;
         return (
             <div>
-                <h2>Factorys</h2>
+                <h2>Factories</h2>
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>
