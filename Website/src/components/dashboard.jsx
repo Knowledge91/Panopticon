@@ -33,14 +33,18 @@ class Dashboard extends React.Component {
         return (
             <div>
                 <h2>Factories</h2>
+                <Typography variation="title">
+                    Welcome to the CUATRECASAS demo for the Global Legal Hackathon. <br />
+                    In this demo we want to prsent you how Smart Contracts within the Ethereum Blockchain can help cooperation and factories to ensure safe workplaces.
+                </Typography>
                 <Paper className={classes.root}>
                     <Table className={classes.table}>
                         <TableHead>
                             <TableRow>
-                                <TableCell>Ethereum Address</TableCell>
                                 <TableCell>Name</TableCell>
-                                <TableCell numeric>Balance</TableCell>
-                                <TableCell numeric>Price</TableCell>
+                                <TableCell>Ethereum Factory Address</TableCell>
+                                <TableCell>Balance</TableCell>
+                                <TableCell>Price</TableCell>
                                 <TableCell>Current Contracts</TableCell>
                                 <TableCell>Contract Factory</TableCell>
                             </TableRow>
@@ -49,10 +53,10 @@ class Dashboard extends React.Component {
                             {factories.map(f => {
                                  return (
                                      <TableRow key={f.address}>
+                                         <TableCell><Link to={`/factory/${f.address}`}>{f.name}</Link></TableCell>
                                          <TableCell><Link to={`/factory/${f.address}`}>{f.address}</Link></TableCell>
-                                         <TableCell>{f.name}</TableCell>
-                                         <TableCell numeric>{f.balance} Ether</TableCell>
-                                         <TableCell numeric>{f.price} Ether</TableCell>
+                                         <TableCell>{f.balance} Ether</TableCell>
+                                         <TableCell>{f.price} Ether</TableCell>
                                          <TableCell >{f.contracts.length} x contracts:<ul>
                                              {f.contracts.map(c => {
                                              return ( <li key={c}><Link to={`/contract/${c}`}>{c}</Link></li> )
@@ -61,7 +65,9 @@ class Dashboard extends React.Component {
                                         </TableCell>
                                          <TableCell>
                                              <IconButton className={classes.menuButton} color="inherit" aria-label="Contract Now">
-                                                 <Link to="/contract" onClick={() => {selectFactory(f)}}><Icon>add_shopping_cart</Icon></Link>
+                                                 <Link to="/contract" onClick={() => {selectFactory(f)}}>
+                                                     <Icon>add_shopping_cart</Icon>
+                                                 </Link>
                                              </IconButton>
                                          </TableCell>
                                      </TableRow>

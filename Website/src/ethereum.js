@@ -4,9 +4,11 @@ import Promise from 'bluebird';
 import moment from 'moment';
 
 
-var web3 = new Web3('http://localhost:8545');
+// var web3 = new Web3('http://localhost:8545');
+var web3 = new Web3('http://34.242.230.161:8545');
 
-var coinbase = '0x59b89a799d0907c69b627a8cebaf92734ae2380c';
+
+var coinbase = "0x75e4691b697738663e7118f25bc59c19ae57eb83";
 
 export function getBalance(address) {
     // return web3.eth.getAccounts().then((accounts) => {
@@ -30,53 +32,27 @@ export function deployPanopticonContract(client, factory, minAge, duration) {
     const contract = new web3.eth.Contract(contractAbi);
     let hasChildLabour = false;
     for(let worker of factory.workers) {
-        console.log(worker);
         if(worker.age < minAge) {
             hasChildLabour = true;
         }
     }
 
     return unlockCoinbase().then((result) => {
-        return new Promise(function(resolve, reject) {
-            contract.deploy({
-                data: contractBin,
-                arguments: [client, factory.address, duration, hasChildLabour]
-            }).send({
-                from: ownerAddress,
-                gas: 4000000,
-                gasPrice: '30000000000000',
-                value: etherToWei(factory.price)
-            }).on('error', (error) => {
-                console.log(`Error deploying contract ${error}`);
-            }).on('transactionHash', (transactionHash) => {
-                console.log(`Successfully submitted contract creation. Transaction hash: ${transactionHash}`);
-                resolve(transactionHash);
-            }).on('receipt', (receipt) => {
-                console.log(`Receipt after mining with contract address: ${receipt.contractAddress}`);
-                console.log(`Receipt after mining with events: ${JSON.stringify(receipt.events, null, 2)}`);
-            }).on('confirmation', (confirmationNumber, receipt) => {
-                console.log(`Confirmation no. ${confirmationNumber} and receipt for contract deployment: `, receipt);
-            });
+        return contract.deploy({
+            data: contractBin,
+            arguments: [client, factory.address, duration, hasChildLabour]
+        }).send({
+            from: ownerAddress,
+            gas: 4000000,
+            gasPrice: '30000000000000',
+            value: etherToWei(factory.price)
         });
-    }).then((transactionHash) => {
-        return waitForReceipt(transactionHash);
-    }).then((receipt) => {
-        const address = receipt.contractAddress;
+    }).then((instance) => {
+        const address = instance._address;
         return address;
     }).catch((error) => {
         console.log('deploy error');
         console.log(error);
-    });
-}
-
-function waitForReceipt(transactionHash) {
-    return new Promise(function(resolve, reject) {
-        var interval = setInterval(() => {
-            web3.eth.getTransactionReceipt(transactionHash).then((receipt) => {
-                clearInterval(interval);
-                resolve(receipt);
-            });
-        }, 3000);
     });
 }
 
@@ -141,24 +117,6 @@ export function getFactoriesInfo(factories) {
         console.log(error);
     });
 }
-
-
-
-
-////////////////////////////////////////////////////////////////////////////////
-// Greeter
-////////////////////////////////////////////////////////////////////////////////
-
-var greeterAdress = '0xa9626f3b4ff5d530ef907fa560b67b9e9dd3a288';
-export function greet() {
-    var myContract = new web3.eth.Contract([{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"greet","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_greeting","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"}], '0xa9626f3b4ff5d530ef907fa560b67b9e9dd3a288');
-
-    myContract.methods.greet().call({from: '0x59b89a799d0907c69b627a8cebaf92734ae2380c'}).then((greeting) => {
-        console.log("yes", greeting);
-        alert(greeting);
-    });
-}
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Helpers

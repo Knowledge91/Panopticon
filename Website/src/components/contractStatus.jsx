@@ -54,6 +54,9 @@ const styles = theme => ({
     card: {
         maxWidth: 345,
     },
+    iconSize: {
+        fontSize: 48
+    },
     media: {
         minHeight: 100,
         width: 100,
@@ -165,7 +168,11 @@ class ContractStatus extends React.Component {
                     <br />
                     <h4 className={classes.center}>Has Child Labour:</h4>"
                     <br />
-                    <div className={classes.center}>{hasChildLabour ? "yes" : "no"}</div>
+                    <div className={classes.center}>{!hasChildLabour ? (
+                            <div><Icon className={classes.iconSize}>done</Icon> <p>no children detected</p></div>
+                    ) : (
+                            <div><Icon color="error" className={classes.iconSize}>pan_tool</Icon><p>Detected children.</p></div>
+                    )}</div>
                     <br />
 
                     <Divider />

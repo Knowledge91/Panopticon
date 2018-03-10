@@ -1,1 +1,1 @@
-geth --datadir ./PrivateNet/chain --networkid 9987  --rpc --rpcapi eth,web3,personal --rpccorsdomain "http://localhost:8080" 
+geth --datadir ./PrivateNet/chain --networkid 9987  --rpc --rpcapi eth,web3,personal --rpccorsdomain "*"

@@ -2,16 +2,16 @@ export function resetSession() {
     const initialState = {
         client: {
             name: "Panto",
-            address: "0x59b89a799d0907c69b627a8cebaf92734ae2380c",
+            address: "0x75e4691b697738663e7118f25bc59c19ae57eb83",
             balance: 0
         },
         factories: [
             {
                 name: "A: Elites Heaven",
-                address: "0x128f5946f637b0c1329b1b87f6574133c20f9fd4",
+                address: "0x4df22a84fbe4209450d14add4d6f157c87008964",
                 balance: 0,
                 price: 250,
-                contracts:['0xFf78BaCCf3000e8B1c3eBa9CD95b26651BDC5B05'],
+                contracts:['0x94EbAfD53Aff14B8511C37A8795851e629763dd7'],
                 workers: [
                     {
                         name: "Elon Reeve Musk",
@@ -29,7 +29,7 @@ export function resetSession() {
             },
             {
                 name: "B: A Childs Nightmare",
-                address: "0xb65224760de037f5f843033ac912667b331af5c4",
+                address: "0xfede10f86987dc79c3d3507c471b45f9c0c4bfc0",
                 balance: 0,
                 price: 100,
                 contracts: [],
@@ -63,16 +63,12 @@ export function resetSession() {
             //     contracts: []
             // }
         ],
-        selectedFactory: {
-            name: "A",
-            address: "0x128f5946f637b0c1329b1b87f6574133c20f9fd4",
-            balance: 0,
-            price: 1000,
-            contracts: []
-        },
+        selectedFactory: {},
         loading: true,
-        bottomNav: 0
+        instructionStep: 0
     };
+
+    initialState.selectedFactory = initialState.factories[0];
 
     sessionStorage.setItem('state', JSON.stringify(initialState));
     return initialState;

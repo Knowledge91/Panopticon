@@ -88,6 +88,7 @@ class Contract extends React.Component {
 
     render() {
         const { classes, client, factory } = this.props;
+        console.log(factory);
         const loading = this.state.loading;
         return (
             <div>

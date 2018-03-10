@@ -15,12 +15,13 @@ import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import Icon from 'material-ui/Icon';
-import BottomNavigation, { BottomNavigationAction } from 'material-ui/BottomNavigation';
 import RestoreIcon from 'material-ui-icons/Restore';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import LocationOnIcon from 'material-ui-icons/LocationOn';
+import Grid from 'material-ui/Grid';
+import Stepper, { Step, StepLabel } from 'material-ui/Stepper';
 
-const styles = {
+const styles = theme => ({
     body: {
         marginTop: 40,
         margin: "auto",
@@ -35,19 +36,34 @@ const styles = {
     center: {
         textAlign: "center",
     },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
-    },
     white: {
         color: "white",
     },
-    bottom: {
-        position: "fixed",
-        bottom: 0,
-        width: "100%"
-    }
-};
+    logo: {
+        height: 60,
+        margin: "auto",
+    },
+    marginTop: {
+        marginTop: 25
+    },
+    instructions: {
+        marginTop: theme.spacing.unit,
+        marginBottom: theme.spacing.unit,
+    },
+});
+
+function getStepContent(step) {
+  switch (step) {
+    case 0:
+      return 'Select campaign settings...';
+    case 1:
+      return 'What is an ad group anyways?';
+    case 2:
+      return 'This is the bit I really care about!';
+    default:
+      return 'Unknown step';
+  }
+}
 
 class App extends React.Component {
     constructor(props) {
@@ -60,10 +76,30 @@ class App extends React.Component {
             this.state = resetSession();
         }
 
+        this.state.instructionStep = this.getInstructionStep(this.props.location.pathname);
+
         this.selectFactory = this.selectFactory.bind(this);
         this.updateState = this.updateState.bind(this);
         this.addContractAddressToFactory = this.addContractAddressToFactory.bind(this);
         this.reset = this.reset.bind(this);
+    }
+
+    componentWillMount() {
+        this.unlisten = this.props.history.listen((location, action) => {
+            const instructionStep = this.getInstructionStep(location.pathname);
+            this.setState({instructionStep});
+        });
+    }
+
+    getInstructionStep(pathname) {
+        switch(pathname) {
+            case "/":
+                return 0;
+            case "/contract":
+                return 1;
+            default:
+                return 2;
+        }
     }
 
     componentDidMount() {
@@ -109,10 +145,39 @@ class App extends React.Component {
         this.setState({ bottomNav });
     };
 
+    getInstruction(i) {
+        switch(i) {
+            case 0:
+                return (
+                    <span>
+                        1.) This is your Dashboard. It shows you a table of all factories you can interact with. Every factory has a name, a balance, a price and and an "address" in the Ethereum Blockchain (Every contract and even you yourself have a address.). If you wish you can click on of the factory addresses to get more information about the company. In the demo we included two companies from which comapny B has infanfts working in their facilities. <br />
+                        In the first step you should "contract" company A, which contains no child work, with clicking on the "Shopping Cart" button to create a new contract.
+                    </span>
+                )
+            case 1:
+                return (
+                    <span>
+                        2.) In the second step you will see the factory and yourself as the contracting parties and have to define the definition of the agreement. <br />
+                        Choose a minimum age that you require from every worker in the factory and a duration after which (on fulfillment) the factory will receive their money. After that sign the contract by clickign on the "Sign" button. This will genereate a Smart Contrcat and upload it to the Blockchain ( this might take some time, so please be patient ).
+                    </span>
+
+                )
+            case 2:
+                return (
+                    <span>
+                        3.) In the last step with give you an overview of the contract status. A depending on the due date the contract might be still in progress. You should notice that we are dealing with three parties: The factory (which wants to be paid), the contract (which has been paid by you, and governs the further proceedure of the payment) and you. The balance is given under the Balance headline, with the corresponding addresses in the Ethereum Blockchain. Under Fullfillment you will see a resum of the contract consisting in one of the three possible states: still in progress, everything in order (factory has been paid) or we detected child work (we have refunded you money). <br />
+                        Now go back to the Dashboard, by clickcing on the Home button (in the upperleft corner) and try to set up a contract with Company B, which as you can check by clicking on its address, will contain child work. This time try to focus on the balance movements (You can check your balance at all times on the top by refreshing the page. Your balance is slowely ingreasing, because we are mining Etherum for you.)
+                    </span>
+                )
+            default:
+                return 'unkown';
+        }
+    }
 
     render() {
         const { classes, history } = this.props;
-        const { factories, client, bottomNav } = this.state;
+        const { factories, client, instructionStep } = this.state;
+        const steps = ["Select Factory A", "Set Contract Conditions", "See Contract Status"];
 
         return (
             <div>
@@ -131,48 +196,63 @@ class App extends React.Component {
                     </Toolbar>
                 </AppBar>
 
-                <div className={classes.body}>
-                    <Route
-                        exact
-                        path='/'
-                        render={() => <Dashboard factories={this.state.factories} selectFactory={this.selectFactory}/>}
-                    />
-                    <Route
-                        exact
-                        path='/contract'
-                        render={() => <Contract client={this.state.client} factory={this.state.selectedFactory} addContractAddressToFactory={this.addContractAddressToFactory} />}
-                    />
-                    <Route
-                        path='/contract/:address'
-                        component={ContractStatus}
-                    />
-                    <Route
-                        path='/factory/:address'
-                        render={
-                            ({match}) => {
-                                const address = match.params.address;
-                                // select factory
-                                for(var factory of factories) {
-                                    if(factory.address == address) {
-                                        break;
+                <Grid container className={classes.root, classes.marginTop} justify="center" direction="column">
+                    <div className={classes.body}>
+                        <Route
+                            exact
+                            path='/'
+                            render={() => <Dashboard factories={this.state.factories} selectFactory={this.selectFactory}/>}
+                        />
+                        <Route
+                            exact
+                            path='/contract'
+                            render={() => <Contract client={this.state.client} factory={this.state.selectedFactory} addContractAddressToFactory={this.addContractAddressToFactory} />}
+                        />
+                        <Route
+                            path='/contract/:address'
+                            component={ContractStatus}
+                        />
+                        <Route
+                            path='/factory/:address'
+                            render={
+                                ({match}) => {
+                                    const address = match.params.address;
+                                    // select factory
+                                    for(var factory of factories) {
+                                        if(factory.address == address) {
+                                            break;
+                                        }
                                     }
+                                    return <Factory factory={factory}/>;
                                 }
-                                return <Factory factory={factory}/>;
                             }
-                        }
-                    />
-                </div>
+                        />
 
-                <BottomNavigation
-                    value={bottomNav}
-                    onChange={this.handleChange}
-                    showLabels
-                    className={classes.bottom}
-                >
-                    <BottomNavigationAction label="Dashboard" icon={<Icon>home</Icon>} onClick={() => {history.push("/")}} />
-                    {/* <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-                        <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} /> */}
-                </BottomNavigation>
+                        <Stepper activeStep={instructionStep}>
+                            {steps.map((label, index) => {
+                                 const props = {};
+                                 const labelProps = {};
+                                 return (
+                                     <Step key={label} {...props}>
+                                         <StepLabel {...labelProps}>{label}</StepLabel>
+                                     </Step>
+                                 );
+                            })}
+                        </Stepper>
+                        <Typography className={classes.instructions} variation="variation">
+                            {this.getInstruction(instructionStep)}
+                        </Typography>
+
+                        <br />
+                        <br />
+
+                        <Grid container justify="space-between" className={classes.bottom}>
+                            <img src="../../media/logo.png" className={classes.logo}/>
+                            <img src="../../media/cuatrecasas.jpg" className={classes.logo}/>
+                        </Grid>
+
+                    </div>
+                </Grid>
             </div>
         )
     }
