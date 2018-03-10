@@ -7,11 +7,11 @@ export function resetSession() {
         },
         factories: [
             {
-                name: "A",
+                name: "A: Elites Heaven",
                 address: "0x128f5946f637b0c1329b1b87f6574133c20f9fd4",
                 balance: 0,
-                price: 1000,
-                contracts: ["0x80510E21dD42F09E550D5AaB81d5024e5f98A16C"],
+                price: 250,
+                contracts:['0xFf78BaCCf3000e8B1c3eBa9CD95b26651BDC5B05'],
                 workers: [
                     {
                         name: "Elon Reeve Musk",
@@ -28,23 +28,23 @@ export function resetSession() {
                 ]
             },
             {
-                name: "B",
+                name: "B: A Childs Nightmare",
                 address: "0xb65224760de037f5f843033ac912667b331af5c4",
                 balance: 0,
-                price: 400,
+                price: 100,
                 contracts: [],
                 workers: [
                     {
-                        name: "Elon Reeve Musk",
-                        age: 46
+                        name: "Millie Bobby Brown",
+                        age: 14
                     },
                     {
-                        name: "Michelle Obama",
-                        age: 54
+                        name: "Iain Armitage",
+                        age: 10
                     },
                     {
-                        name: "Will Smith",
-                        age: 49
+                        name: "Boomer Phelps",
+                        age: 1
                     },
                 ]
             },

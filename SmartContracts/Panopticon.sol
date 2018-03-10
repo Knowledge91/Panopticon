@@ -7,8 +7,8 @@ contract Panopticon {
 
   bool public hasChildLabour = false;
 
- l uint public deadline;
-  bool public fulfilled;
+  uint public deadline;
+  bool public fulfilled; // tells if at the end of the contract the factory complied with the clauses
 
   event ContractEnd(bool fulfilled, uint256 amount);
 

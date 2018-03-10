@@ -1065,3 +1065,33 @@
 09:07:05.923944 table@remove removed @304
 09:07:05.924989 table@remove removed @305
 09:07:05.925669 table@remove removed @306
+09:42:34.902442 memdb@flush N·36355 S·3MiB
+09:42:34.936951 memdb@flush created L0@313 N·36355 S·633KiB "n:\x00..ing,v2645420":"n:\xff..ong,v2639019"
+09:42:34.937027 version@stat F·[1 3] S·4MiB[633KiB 4MiB] Sc·[0.25 0.04]
+09:42:34.938047 memdb@flush committed F·1 T·35.544499ms
+09:42:34.939056 journal@remove removed @307
+09:42:35.870659 table@compaction L0·1 -> L1·3 S·4MiB Q·2658171
+09:42:35.949705 table@build created L1@314 N·33568 S·2MiB "n:\x00..ing,v877624":"n:|..ing,v1840752"
+09:42:36.028166 table@build created L1@315 N·33665 S·2MiB "n:|..ail,v641326":"n:\xfa..ing,v168572"
+09:42:36.035209 table@build created L1@316 N·1595 S·99KiB "n:\xfa..ing,v1739261":"version,v1"
+09:42:36.035309 version@stat F·[0 3] S·4MiB[0B 4MiB] Sc·[0.00 0.04]
+09:42:36.035752 table@compaction committed F-1 S-603KiB Ke·0 D·35960 T·165.048324ms
+09:42:36.036059 table@remove removed @313
+09:42:36.036695 table@remove removed @309
+09:42:36.037584 table@remove removed @310
+09:42:36.038095 table@remove removed @311
+10:18:34.864950 memdb@flush N·36246 S·3MiB
+10:18:34.911175 memdb@flush created L0@318 N·36246 S·608KiB "n:\x00..ing,v2692168":"n:\xff..ing,v2677583"
+10:18:34.911247 version@stat F·[1 3] S·4MiB[608KiB 4MiB] Sc·[0.25 0.04]
+10:18:34.914302 memdb@flush committed F·1 T·49.268995ms
+10:18:34.915882 journal@remove removed @312
+10:18:35.409168 table@compaction L0·1 -> L1·3 S·4MiB Q·2694418
+10:18:35.473652 table@build created L1@319 N·33587 S·2MiB "n:\x00..ing,v877624":"n:|..ail,v2105467"
+10:18:35.543685 table@build created L1@320 N·33675 S·2MiB "n:|..ing,v2105463":"n:\xf9..ong,v1541914"
+10:18:35.547879 table@build created L1@321 N·1825 S·112KiB "n:\xf9..ail,v1971178":"version,v1"
+10:18:35.547944 version@stat F·[0 3] S·4MiB[0B 4MiB] Sc·[0.00 0.04]
+10:18:35.548210 table@compaction committed F-1 S-593KiB Ke·0 D·35987 T·138.999379ms
+10:18:35.548478 table@remove removed @318
+10:18:35.548950 table@remove removed @314
+10:18:35.549611 table@remove removed @315
+10:18:35.550137 table@remove removed @316

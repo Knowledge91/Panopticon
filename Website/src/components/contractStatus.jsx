@@ -13,7 +13,7 @@ import Divider from 'material-ui/Divider';
 import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import { DoubleDounce } from 'styled-spinkit';
-
+import ReactCountdownClock from 'react-countdown-clock';
 
 const styles = theme => ({
     container: {
@@ -78,10 +78,6 @@ class ContractStatus extends React.Component {
             factory: null,
             loading: false
         }
-
-        this.getContractBalance = this.getContractBalance.bind(this);
-        this.getFactoryBalance = this.getFactoryBalance.bind(this);
-        this.getUserBalance = this.getUserBalance.bind(this);
     }
 
     componentDidMount() {
@@ -96,33 +92,26 @@ class ContractStatus extends React.Component {
 
     outputDueDate() {
         if(this.state.dueDate) {
-            return moment.unix(this.state.dueDate).format("dddd, MMMM Do YYYY, h:mm:ss a");
-        }
-    }
-
-    getContractBalance() {
-        if(this.state.fulfilled) {
-            return 0;
-        } else {
-            return this.state.balance;
-        }
-    }
-
-    getFactoryBalance() {
-        if(this.state.fulfilled && !this.state.hasChildLabour) {
-            return this.state.balance;
-        } else {
-            return 0;
-        }
-    }
-
-    getUserBalance() {
-        if(this.state.fulfilled && !this.state.hasChildLabour) {
-            return this.state.balance;
-        } else if(!this.state.fulfilled) {
-            return this.state.balance;
-        } else {
-            return 0;
+            const dueDate = moment.unix(this.state.dueDate);
+            const timeDiffSeconds = dueDate.diff(moment.now(), 'seconds');
+            if(timeDiffSeconds > 0) {
+                return     (
+                    <div>
+                    <h4>Is in:</h4>
+                    <ReactCountdownClock seconds={timeDiffSeconds}
+                    color="#000"
+                    alpha={0.9}
+                    size={300}
+                    onComplete={() => {location.reload()}} />
+                    </div>
+                )
+            } else {
+                return (
+                    <div>
+                    <h4>Was on: {moment.unix(this.state.dueDate).format("dddd, MMMM Do YYYY, h:mm:ss a")}</h4>
+                    </div>
+                )
+            }
         }
     }
 
@@ -131,17 +120,25 @@ class ContractStatus extends React.Component {
         const { classes } = this.props;
 
         let fulfillment = { media: "question.png", title: "Waiting for due date.", text: "" };
-        console.log(fulfilled);
-        if(fulfilled) {
-            if(hasChildLabour) {
+        let userBalance = - weiToEther(balance);
+        let contractBalance = weiToEther(balance);
+        let factoryBalance = 0;
+
+        const dueDateMoment = moment.unix(dueDate);
+        const timeDiffSeconds = dueDateMoment.diff(moment.now(), 'seconds');
+        if(timeDiffSeconds < 0) {
+            if(!fulfilled) {
                 fulfillment.media = "cross.png";
                 fulfillment.text = "Contained child labour.";
                 fulfillment.title = "Transfered money back to you";
+                userBalance = 0;
             } else {
                 fulfillment.media = "check.png";
                 fulfillment.text = "Everything in order.";
                 fulfillment.title = "Transfered money to Factory.";
+                factoryBalance = weiToEther(balance);
             }
+            contractBalance = 0;
         }
 
 
@@ -174,7 +171,7 @@ class ContractStatus extends React.Component {
                     <Divider />
 
                     <br />
-                    <h4 className={classes.center}>Balances:</h4>"
+                    <h4 className={classes.center}>Balances (& Addresses):</h4>"
                     <br />
 
                     <Grid container className={classes.root} justify="space-around" spacing={40}>
@@ -186,7 +183,7 @@ class ContractStatus extends React.Component {
                             />
                             <CardContent>
                                 <Typography color="error" variant="title">
-                                    You Balance:  {- weiToEther(this.getUserBalance())} Ether
+                                    You Paid: {userBalance} Ether
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -203,12 +200,12 @@ class ContractStatus extends React.Component {
                             />
                             <CardContent>
                                 <Typography variant="title">
-                                    Contract Balance:  {weiToEther(this.getContractBalance())} Ether
+                                    The Contract yields: {contractBalance} Ether
                                 </Typography>
                             </CardContent>
                             <CardActions>
                                 <Button size="small" color="primary">
-                                    <Link to="/">{address}</Link>
+                                    <Link to={`/contract/${address}`}>{address}</Link>
                                 </Button>
                             </CardActions>
                         </Card>
@@ -220,9 +217,7 @@ class ContractStatus extends React.Component {
                             />
                             <CardContent>
                                 <Typography variant="title">
-                                    Facotory Balance:  {
-                                        weiToEther(this.getFactoryBalance())
-                                    } Ether
+                                    Facotory received:  {factoryBalance} Ether
                                 </Typography>
                             </CardContent>
                             <CardActions>

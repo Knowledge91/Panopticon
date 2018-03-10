@@ -72,7 +72,7 @@ class Contract extends React.Component {
 
     deployContract() {
         this.setState({ loading: true });
-        deployPanopticonContract(this.props.client.address, this.props.factory.address, this.state.minAge, this.state.duration).then((address) => {
+        deployPanopticonContract(this.props.client.address, this.props.factory, this.state.minAge, this.state.duration).then((address) => {
             if(address) {
                 this.props.addContractAddressToFactory(address, this.props.factory);
                 this.props.history.push(`/contract/${address}`);

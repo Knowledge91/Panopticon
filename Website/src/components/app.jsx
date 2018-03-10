@@ -85,10 +85,11 @@ class App extends React.Component {
 
     reset() {
         this.setState(resetSession);
+        location.reload();
     }
 
     selectFactory(factory) {
-        console.log('select');  
+        console.log('select');
         console.log(factory);
         this.setState({
             selectedFactory: factory
