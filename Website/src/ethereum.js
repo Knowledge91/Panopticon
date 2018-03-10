@@ -97,11 +97,8 @@ export function contractInfo(contract) {
     });
 }
 
-export function fulfillPanopticonContract(address) {
-    address = "0xc7fA41f81Dce2f780Fe9677Ef0eD0ca328a173Db";
+export function fulfillContract(address) {
     const contract = new web3.eth.Contract(contractAbi, address);
-
-    console.log(contract);
 
     return unlockCoinbase().then(() => {
         return contract.methods.fulfillContract().send({from: coinbase});
@@ -159,7 +156,7 @@ export function greet() {
 ////////////////////////////////////////////////////////////////////////////////
 // Helpers
 ////////////////////////////////////////////////////////////////////////////////
-function weiToEther(wei) {
+export function weiToEther(wei) {
     return wei/1000000000000000000;
 }
 function etherToWei(ether) {

@@ -43,7 +43,7 @@ const styles = {
         color: "white",
     },
     bottom: {
-        position: "absolute",
+        position: "fixed",
         bottom: 0,
         width: "100%"
     }
@@ -88,6 +88,8 @@ class App extends React.Component {
     }
 
     selectFactory(factory) {
+        console.log('select');  
+        console.log(factory);
         this.setState({
             selectedFactory: factory
         });

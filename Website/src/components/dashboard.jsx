@@ -53,14 +53,15 @@ class Dashboard extends React.Component {
                                          <TableCell>{f.name}</TableCell>
                                          <TableCell numeric>{f.balance} Ether</TableCell>
                                          <TableCell numeric>{f.price} Ether</TableCell>
-                                         <TableCell numeric>{f.contracts.length}x [
+                                         <TableCell >{f.contracts.length} x contracts:<ul>
                                              {f.contracts.map(c => {
-                                                  return ( <Link key={c} to={`/contract/${c}`}>{c},</Link> )
+                                             return ( <li key={c}><Link to={`/contract/${c}`}>{c}</Link></li> )
                                              })}
-                                        ]</TableCell>
+                                         </ul>
+                                        </TableCell>
                                          <TableCell>
                                              <IconButton className={classes.menuButton} color="inherit" aria-label="Contract Now">
-                                                 <Link to="/contract" onClick={() => {selectFactory({f})}}><Icon>add_shopping_cart</Icon></Link>
+                                                 <Link to="/contract" onClick={() => {selectFactory(f)}}><Icon>add_shopping_cart</Icon></Link>
                                              </IconButton>
                                          </TableCell>
                                      </TableRow>

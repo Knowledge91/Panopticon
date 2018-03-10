@@ -1005,3 +1005,63 @@
 03:06:52.250807 table@remove removed @284
 03:06:52.251379 table@remove removed @285
 03:06:52.251787 table@remove removed @286
+03:41:03.494224 memdb@flush N·36588 S·3MiB
+03:41:03.519914 memdb@flush created L0@293 N·36588 S·618KiB "n:\x00..ing,v2509385":"n:\xff..ing,v2478631"
+03:41:03.519958 version@stat F·[1 3] S·4MiB[618KiB 4MiB] Sc·[0.25 0.04]
+03:41:03.520459 memdb@flush committed F·1 T·26.170783ms
+03:41:03.523555 journal@remove removed @287
+03:41:03.934145 table@compaction L0·1 -> L1·3 S·4MiB Q·2512166
+03:41:03.978548 table@build created L1@294 N·33573 S·2MiB "n:\x00..ing,v877624":"n:~..ing,v160019"
+03:41:04.019030 table@build created L1@295 N·33662 S·2MiB "n:~..ing,v68527":"n:\xfe..ail,v1489654"
+03:41:04.019850 table@build created L1@296 N·426 S·27KiB "n:\xfe..ing,v1489647":"version,v1"
+03:41:04.019902 version@stat F·[0 3] S·4MiB[0B 4MiB] Sc·[0.00 0.04]
+03:41:04.020102 table@compaction committed F-1 S-608KiB Ke·0 D·36479 T·85.890391ms
+03:41:04.020300 table@remove removed @293
+03:41:04.020674 table@remove removed @289
+03:41:04.021260 table@remove removed @290
+03:41:04.021654 table@remove removed @291
+04:15:02.020366 memdb@flush N·36593 S·3MiB
+04:15:02.047474 memdb@flush created L0@298 N·36593 S·617KiB "n:\x00..ing,v2545213":"n:\xff..ong,v2523327"
+04:15:02.047546 version@stat F·[1 3] S·4MiB[617KiB 4MiB] Sc·[0.25 0.04]
+04:15:02.048213 memdb@flush committed F·1 T·27.503621ms
+04:15:02.050560 journal@remove removed @292
+04:15:02.485394 table@compaction L0·1 -> L1·3 S·4MiB Q·2548752
+04:15:02.527938 table@build created L1@299 N·33585 S·2MiB "n:\x00..ing,v877624":"n:~..ing,v1787053"
+04:15:02.568971 table@build created L1@300 N·33669 S·2MiB "n:~..ing,v2527587":"n:\xfd..ing,v2283717"
+04:15:02.570123 table@build created L1@301 N·588 S·38KiB "n:\xfd..ing,v1802206":"version,v1"
+04:15:02.570191 version@stat F·[0 3] S·4MiB[0B 4MiB] Sc·[0.00 0.04]
+04:15:02.570366 table@compaction committed F-1 S-608KiB Ke·0 D·36412 T·84.904193ms
+04:15:02.570573 table@remove removed @298
+04:15:02.571010 table@remove removed @294
+04:15:02.571590 table@remove removed @295
+04:15:02.572005 table@remove removed @296
+04:49:44.134779 memdb@flush N·36578 S·3MiB
+04:49:44.160455 memdb@flush created L0@303 N·36578 S·604KiB "n:\x00..ing,v2564167":"n:\xff..ing,v2558324"
+04:49:44.160513 version@stat F·[1 3] S·4MiB[604KiB 4MiB] Sc·[0.25 0.04]
+04:49:44.161188 memdb@flush committed F·1 T·26.087488ms
+04:49:44.163629 journal@remove removed @297
+04:49:45.057219 table@compaction L0·1 -> L1·3 S·4MiB Q·2585331
+04:49:45.099820 table@build created L1@304 N·33578 S·2MiB "n:\x00..ing,v877624":"n:}..ing,v67127"
+04:49:45.140665 table@build created L1@305 N·33724 S·2MiB "n:}..ail,v7066":"n:\xfd..ing,v1060517"
+04:49:45.142005 table@build created L1@306 N·689 S·44KiB "n:\xfd..ing,v2287036":"version,v1"
+04:49:45.142068 version@stat F·[0 3] S·4MiB[0B 4MiB] Sc·[0.00 0.04]
+04:49:45.142335 table@compaction committed F-1 S-599KiB Ke·0 D·36429 T·85.022066ms
+04:49:45.142537 table@remove removed @303
+04:49:45.142961 table@remove removed @299
+04:49:45.143494 table@remove removed @300
+04:49:45.143891 table@remove removed @301
+09:07:04.925721 memdb@flush N·36395 S·3MiB
+09:07:04.970876 memdb@flush created L0@308 N·36395 S·656KiB "n:\x00..ing,v2620405":"n:\xff..ing,v2585930"
+09:07:04.970947 version@stat F·[1 3] S·4MiB[656KiB 4MiB] Sc·[0.25 0.04]
+09:07:04.971895 memdb@flush committed F·1 T·45.946343ms
+09:07:04.975893 journal@remove removed @302
+09:07:05.789116 table@compaction L0·1 -> L1·3 S·4MiB Q·2621786
+09:07:05.847304 table@build created L1@309 N·33602 S·2MiB "n:\x00..ing,v877624":"n:}..ing,v2591412"
+09:07:05.920072 table@build created L1@310 N·33720 S·2MiB "n:}..ing,v2352429":"n:\xfb..ing,v1812120"
+09:07:05.922739 table@build created L1@311 N·1111 S·70KiB "n:\xfb..ing,v1397483":"version,v1"
+09:07:05.922817 version@stat F·[0 3] S·4MiB[0B 4MiB] Sc·[0.00 0.04]
+09:07:05.923031 table@compaction committed F-1 S-628KiB Ke·0 D·35953 T·133.87165ms
+09:07:05.923314 table@remove removed @308
+09:07:05.923944 table@remove removed @304
+09:07:05.924989 table@remove removed @305
+09:07:05.925669 table@remove removed @306

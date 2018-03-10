@@ -72,7 +72,7 @@ class Contract extends React.Component {
 
     deployContract() {
         this.setState({ loading: true });
-        deployPanopticonContract(this.props.client.address, this.props.factory.address).then((address) => {
+        deployPanopticonContract(this.props.client.address, this.props.factory.address, this.state.minAge, this.state.duration).then((address) => {
             if(address) {
                 this.props.addContractAddressToFactory(address, this.props.factory);
                 this.props.history.push(`/contract/${address}`);
@@ -99,7 +99,7 @@ class Contract extends React.Component {
                     <Paper>
                         <form>
                             <br />
-                            <h3 className={classes.center}>Contracting Parties</h3>"
+                            <h3 className={classes.center}>Contracting Parties:</h3>"
                             <br />
 
                             <Grid container className={classes.root} justify="space-around" spacing={40}>
@@ -112,7 +112,7 @@ class Contract extends React.Component {
                             <Divider className={classes.margin} />
 
                             <br />
-                            <h3 className={classes.center}>Conditions</h3>"
+                            <h3 className={classes.center}>Conditions:</h3>"
                             <br />
 
                             <Grid container className={classes.root} justify="space-around" spacing={40}>
@@ -163,11 +163,11 @@ class Contract extends React.Component {
                             <Divider className={classes.margin} />
 
                             <br />
-                            <h3 className={classes.center}>Contracting Parties</h3>"
+                            <h3 className={classes.center}>Confirmation:</h3>"
                             <br />
 
                             <Grid container justify="center">
-                                <Button className={classes.button} variant="raised" color="primary">
+                                <Button className={classes.button} variant="raised" color="primary" onClick={this.deployContract}>
                                     Sign
                                     <Icon className={classes.rightIcon}>send</Icon>
                                 </Button>
@@ -177,7 +177,10 @@ class Contract extends React.Component {
                     </Paper>
                 </div>
             ) : (
-                <DoubleDounce size="100" />
+                <div>
+                    <DoubleDounce size="100" />
+                    <h2 className={classes.center}>Submitting your Smart Contract to the Ethereum Blockchain. <br />This operation may take a few seconds... </h2>
+                </div>
             )}
                 </div>
         )

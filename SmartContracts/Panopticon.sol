@@ -7,7 +7,7 @@ contract Panopticon {
 
   bool public hasChildLabour = false;
 
-  uint public deadline;
+ l uint public deadline;
   bool public fulfilled;
 
   event ContractEnd(bool fulfilled, uint256 amount);
