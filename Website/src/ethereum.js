@@ -4,9 +4,8 @@ import Promise from 'bluebird';
 import moment from 'moment';
 
 
-// var web3 = new Web3('http://localhost:8545');
-var web3 = new Web3('http://34.242.230.161:8545');
-
+var web3 = new Web3('http://localhost:8545');
+// var web3 = new Web3('http://34.242.230.161:8545');
 
 var coinbase = "0x75e4691b697738663e7118f25bc59c19ae57eb83";
 

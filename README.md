@@ -14,6 +14,11 @@ To get the demo running we need to **setup a private blockchain** and **setup th
 1. Install the ethereum [geth client](https://github.com/ethereum/go-ethereum/wiki/geth)
 2. Initialize the chain with a so called *genesis* file. The genesis file decides about things like the gas price and the dificulty of mining blocks. To initialize the private block chain run:  `geth --datadir ./PrivateNet/chain json init ./PrivateNet/genesis.json` 
 3. Run an *Ethereum Node*. An Ethereum node is a computer connected to the ethereum net, which will be later on communicating with our React App. The node will have an **ipc** and an **HTTP** access point, we will connect to the later. To start the node with the geth client run: `geth --datadir ./PrivateNet/chain --networkid 9987 --rpc --rpcport 8545 --rpcaddr 0.0.0.0 --rpcapi "eth,web3,personal" --rpccorsdomain "*"`. **Attention: the private net will be open to every IP address! Which should not be used in production!**
+5. Now that you have a running *private blockchain* open the [Javascript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console) by running: `geth attach ./PrivateNet/chain/geth.ipc` and connect to the **ipc** point.
+6. Create three *Ethereum accounts*. One for yourself (also refered to as coinbase) and two for the two example fabrics by running: `personal.newAccount()` in the newly opened *javascript console*. Every account you create yields an **address** remember these addresses for later (we will have to configure the react app with these). If your forgot them just reopen the *Javascript console* of you *private blockchain again* and execute `eth.getAccounts()`, which will display the addresses of all of your created accounts.
+
+---
+
 Some infos about the **Ethereum Node** configuration:
 - `--rpc` starts the http server
 - `--rpcorsdomain "*"` allows CORS for any address (important for the React app, otherways we would not allow any Browser to accept our data)
@@ -21,8 +26,7 @@ Some infos about the **Ethereum Node** configuration:
 - `--rpcaddr 0.0.0.0` opens the HTTP server to any IP address (**not secure**)
 - `--rpcapi "eth,web3,personal"` activates the **eth** **web3** and **personal** [Management APIs](https://github.com/ethereum/go-ethereum/wiki/Management-API), which we will query in the React App
 
-Now you are ready to go! If you want to experiment with your newly blockchain you can use the [Javascript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console). Simply run: `geth attach ./PrivateNet/chain/geth.ipc` and connect to the **ipc** point.
-
+Now you are ready to go! 
 Some useful commands for the **Javascript Console**:
 - `personal.newAccount()` - creates a new Ethereum account
 - `eth.coinbase()` - yields the address of you main account
@@ -30,26 +34,7 @@ Some useful commands for the **Javascript Console**:
 - `eth.accounts()` - yields an array of accounts
 
 ### Setup the React App
-
-
-
-## Run
-- `. ./PrivateNet/start.sh` or
-- `geth --datadir ./PrivateNet/chain --networkid 9987 --rpc --rpcapi eth,web3,personal --rpccorsdomain "http://localhost:8080"`
-`--rpc` starts the http server
-`--rpccorsdomain "http://localhost:8080"` allows CORS for localhost (alternative put '*' to allow for every origin) 
-
-
-## Javascript Console
-- `geth attach ./ACPrivateChain/geth.ipc`
-
-## Account
-Name: (address, password)
-- coinbase: ('0x59b89a799d0907c69b627a8cebaf92734ae2380c')
-- client: ("0x128f5946f637b0c1329b1b87f6574133c20f9fd4", "test")
-- factory A: ("0xb65224760de037f5f843033ac912667b331af5c4", "test")
-- Greeter address: '0xa9626f3b4ff5d530ef907fa560b67b9e9dd3a288'
-
-## Util
-create new Account
-- `personal.newAccount()`
+The **React App** is located in the `/Website` directory and can be run with `yarn` and `webpack`. The app uses Cookies to save the state of the applications and we need to configure an inital state containing the ethereum addresses of the fabrics and your address.
+1. edit `/Website/src/sessionStorage.js` and subsitute the `client.address`, `factories[0].address` and `factories[1].address` from the accounts your created in your *private blockchain*.
+2. edit `/Website/ethereum.js` and  subsitute `var coinbase =` to your coinbase (line 10, your coinbase is the first address appearing in the `eth.accounts()`)
+3. As we used Webpack to compile the javascript code you can simply run a shell-script which we prepared to start the **webpack webserver**: Execute `yarn start` within the `/Website` folder and everything should start up automatically.
