@@ -35,7 +35,7 @@ class Dashboard extends React.Component {
                 <h2>Factories</h2>
                 <Typography variation="title">
                     Welcome to the CUATRECASAS demo for the Global Legal Hackathon. <br />
-                    In this demo we want to prsent you how Smart Contracts within the Ethereum Blockchain can help cooperation and factories to ensure safe workplaces.
+                    In this demo, we want to present you how Smart Contracts within the Ethereum Blockchain can help cooperation and factories to ensure safe workplaces.
                 </Typography>
                 <Paper className={classes.root}>
                     <Table className={classes.table}>

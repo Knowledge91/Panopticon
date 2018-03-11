@@ -1,5 +1,9 @@
 # Panopticon
+This is the Github repository of the CUATRECASAS demo for the Global Legal Hackathon. 
 
+## Technical Details
+The Front-End is a **[React App](https://reactjs.org)** designed with **[Google Material UI](https://material-ui-next.com)** hosted on **[AWS S3](https://aws.amazon.com/s3)** connected to the **[AWS Cloudfront](https://aws.amazon.com/cloudfront)**. The "backend" is given by a **[private Ethereum blockchain](https://www.ethereum.org/)** hosted on an **[AWS EC2](https://aws.amazon.com/ec2/) t.medium instance** and connected to the frontend via the ethereum **[Web3js Node Library](https://web3js.readthedocs.io/)**. 
+ 
 ## Install
 - `geth --datadir ./ACPrivateChain init ./CustomGenesis.json`
 
