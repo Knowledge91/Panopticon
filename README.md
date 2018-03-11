@@ -13,7 +13,13 @@ To get the demo running we need to **setup a private blockchain** and **setup th
 ### Setup a Private Blockchain
 1. Install the ethereum [geth client](https://github.com/ethereum/go-ethereum/wiki/geth)
 2. Initialize the chain with a so called *genesis* file. The genesis file decides about things like the gas price and the dificulty of mining blocks. To initialize the private block chain run:  `geth --datadir ./PrivateNet/chain json init ./PrivateNet/genesis.json` 
-3. Run an *Ethereum Node*. An Ethereum node is a computer connected to the ethereum net, which will be later on communicating with our React App. The node will have an **ipc** and an **HTTP** access point, we will connect to the later. To start the node with the geth client run: `geth --datadir ./PrivateNet/chain --networkid 9987 --rpc --rpcport 8545 --rpcaddr 0.0.0.0 --rpcapi "eth,web3,personal" --rpccorsdomain "*"`. **Attention: the private net will be open to every IP address! Which should not be used in production!** 
+3. Run an *Ethereum Node*. An Ethereum node is a computer connected to the ethereum net, which will be later on communicating with our React App. The node will have an **ipc** and an **HTTP** access point, we will connect to the later. To start the node with the geth client run: `geth --datadir ./PrivateNet/chain --networkid 9987 --rpc --rpcport 8545 --rpcaddr 0.0.0.0 --rpcapi "eth,web3,personal" --rpccorsdomain "*"`. **Attention: the private net will be open to every IP address! Which should not be used in production!**
+Some infos about the **Ethereum Node** configuration:
+- `--rpc` starts the http server
+- `--rpcorsdomain "*"` allows CORS for any address (important for the React app, otherways we would not allow any Browser to accept our data)
+- `--rpcport 8545` defines 8545 as the HTTP port
+- `--rpcaddr 0.0.0.0` opens the HTTP server to any IP address (**not secure**)
+- `--rpcapi "eth,web3,personal"` activates the **eth** **web3** and **personal** [Management APIs](https://github.com/ethereum/go-ethereum/wiki/Management-API), which we will query in the React App
 
 Now you are ready to go! If you want to experiment with your newly blockchain you can use the [Javascript console](https://github.com/ethereum/go-ethereum/wiki/JavaScript-Console). Simply run: `geth attach ./PrivateNet/chain/geth.ipc` and connect to the **ipc** point.
 
@@ -25,7 +31,6 @@ Some useful commands for the **Javascript Console**:
 
 ### Setup the React App
 
-- `geth --datadir ./ACPrivateChain init ./CustomGenesis.json`
 
 
 ## Run
