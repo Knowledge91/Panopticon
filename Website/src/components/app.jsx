@@ -150,23 +150,23 @@ class App extends React.Component {
             case 0:
                 return (
                     <span>
-                        1.) This is your Dashboard. It shows you a table of all factories you can interact with. Every factory has a name, a balance, a price and and an "address" in the Ethereum Blockchain (Every contract and even you yourself have a address.). If you wish you can click on of the factory addresses to get more information about the company. In the demo we included two companies from which comapny B has infanfts working in their facilities. <br />
-                        In the first step you should "contract" company A, which contains no child work, with clicking on the "Shopping Cart" button to create a new contract.
+                        1.) This is your Dashboard. It shows you a table of all factories you can interact with. Every factory has a name, a balance, a price and an "address" in the Ethereum Blockchain (Every contract and even you yourself have an address.). If you wish you can click one of the factory addresses to get more information about the company. In the demo, we included two companies from which company B has infants working in their facilities. <br />
+                        In the first step, you should "contract" company A, which contains no child work, by clicking on the "Shopping Cart" button to create a new contract.
                     </span>
                 )
             case 1:
                 return (
                     <span>
-                        2.) In the second step you will see the factory and yourself as the contracting parties and have to define the definition of the agreement. <br />
-                        Choose a minimum age that you require from every worker in the factory and a duration after which (on fulfillment) the factory will receive their money. After that sign the contract by clickign on the "Sign" button. This will genereate a Smart Contrcat and upload it to the Blockchain ( this might take some time, so please be patient ).
+                        2.) In the second step, you will see the factory and yourself as the contracting parties. You now will have to define the definition of the agreement. <br />
+                        Choose a minimum age that you require from every worker in the factory and a duration after which (on fulfillment) the factory will receive their money. After that sign the contract by clicking on the "Sign" button. This will generate a Smart Contract and upload it to the Blockchain. The contract generation might take some time, so please be patient.
                     </span>
 
                 )
             case 2:
                 return (
                     <span>
-                        3.) In the last step with give you an overview of the contract status. A depending on the due date the contract might be still in progress. You should notice that we are dealing with three parties: The factory (which wants to be paid), the contract (which has been paid by you, and governs the further proceedure of the payment) and you. The balance is given under the Balance headline, with the corresponding addresses in the Ethereum Blockchain. Under Fullfillment you will see a resum of the contract consisting in one of the three possible states: still in progress, everything in order (factory has been paid) or we detected child work (we have refunded you money). <br />
-                        Now go back to the Dashboard, by clickcing on the Home button (in the upperleft corner) and try to set up a contract with Company B, which as you can check by clicking on its address, will contain child work. This time try to focus on the balance movements (You can check your balance at all times on the top by refreshing the page. Your balance is slowely ingreasing, because we are mining Etherum for you.)
+                        3.) In the last step, we give you an overview of the contract status. A depending on the due date the contract might be still in progress. You should notice that we are dealing with three parties: The factory (which wants to be paid), the contract (which has been paid by you, and governs the further procedure of the payment) and you. The balance is given under the Balance headline, with the corresponding addresses in the Ethereum Blockchain. Under the header "Fulfillment" you will see a resume of the contract consisting in one of the three possible states: still in progress, everything in order (factory has been paid) or we detected child work so we refunded your money!. <br />
+                        Now go back to the Dashboard, by clicking on the home button (in the upper-left corner, the home next to the "Panopticon" writing) and try to set up a contract with Company B, which as you can check, by clicking on its address, will contain child work. This time try to focus on the balance movements. You can check your balance at all times on the top by refreshing the page. Your balance is slowly increasing because we are mining Etherum for you.
                     </span>
                 )
             default:
